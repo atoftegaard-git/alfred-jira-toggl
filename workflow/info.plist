@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1881DBCC-B52A-4800-B66E-DA19A5149645</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>74D06B5F-5499-41C6-8CCA-F39F9025F65F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>18F76DB7-75CF-4A40-8036-2DEB133D4D2D</key>
 		<array>
 			<dict>
@@ -64,6 +77,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>D466EB30-9160-4F40-898E-87161AA09882</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>20A98376-0101-4A5A-8F34-BE02B93FFA42</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>74D06B5F-5499-41C6-8CCA-F39F9025F65F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -142,7 +168,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4087FF83-8CB1-4D31-A543-C062BA0E75CE</string>
+				<string>F44AC37E-5CEA-4AC9-829E-6B391167037D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -241,6 +267,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>AE27CCFE-6CCB-48C4-BBBA-D902202B79A1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>74D06B5F-5499-41C6-8CCA-F39F9025F65F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B495392B-B974-46C7-8898-479E7B75DA8E</key>
 		<array>
 			<dict>
@@ -294,6 +333,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CB39D037-7186-4395-B38C-877D03E36098</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>74D06B5F-5499-41C6-8CCA-F39F9025F65F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D466EB30-9160-4F40-898E-87161AA09882</key>
 		<array>
 			<dict>
@@ -325,6 +377,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F44AC37E-5CEA-4AC9-829E-6B391167037D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4087FF83-8CB1-4D31-A543-C062BA0E75CE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0D9EAD6F-F9E3-434C-8669-111C893F1DD3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>20A98376-0101-4A5A-8F34-BE02B93FFA42</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -553,6 +630,11 @@
 				<string>{query}</string>
 				<key>title</key>
 				<string>Jira Toggl Integration</string>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>post-notification</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -958,6 +1040,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:prompt}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>5</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>prompt</string>
+						<key>uid</key>
+						<string>0D9EAD6F-F9E3-434C-8669-111C893F1DD3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>F44AC37E-5CEA-4AC9-829E-6B391167037D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1041,6 +1155,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>post-notification</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>74D06B5F-5499-41C6-8CCA-F39F9025F65F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./alfred-jira-toggl --add-description --issue-key "$issue_key"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>20A98376-0101-4A5A-8F34-BE02B93FFA42</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1119,6 +1275,13 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
+		<key>20A98376-0101-4A5A-8F34-BE02B93FFA42</key>
+		<dict>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>670</real>
+		</dict>
 		<key>27F9DC1C-B8BB-443B-BECA-A06CDF0D3059</key>
 		<dict>
 			<key>xpos</key>
@@ -1168,6 +1331,13 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>ypos</key>
 			<real>380</real>
 		</dict>
+		<key>74D06B5F-5499-41C6-8CCA-F39F9025F65F</key>
+		<dict>
+			<key>xpos</key>
+			<real>840</real>
+			<key>ypos</key>
+			<real>670</real>
+		</dict>
 		<key>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</key>
 		<dict>
 			<key>xpos</key>
@@ -1208,7 +1378,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>795</real>
 		</dict>
 		<key>B495392B-B974-46C7-8898-479E7B75DA8E</key>
 		<dict>
@@ -1265,6 +1435,13 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<real>30</real>
 			<key>ypos</key>
 			<real>615</real>
+		</dict>
+		<key>F44AC37E-5CEA-4AC9-829E-6B391167037D</key>
+		<dict>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>590</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

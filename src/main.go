@@ -40,6 +40,7 @@ var (
     overrideDescriptionFlag bool
     checkRunningFlag        bool
     overrideIssueKeyFlag    string
+    addToEmptyDescriptionFlag   bool
 )
 
 func init() {
@@ -51,6 +52,7 @@ func init() {
     flag.BoolVar(&overrideDescriptionFlag, "override-description", false, "overrides description in current toggl entry")
     flag.BoolVar(&checkRunningFlag, "check", false, "checks if toggl is currently running")
     flag.StringVar(&overrideIssueKeyFlag, "issue-key", "", "enables the user to pass a issue key to the workflow")
+    flag.BoolVar(&addToEmptyDescriptionFlag, "add-description", false, "Add issue key to empty description")
 }
 
 func GetURL() string {
@@ -126,7 +128,26 @@ func run() {
         return
     }
 
-    if overrideIssueKeyFlag != "" {
+    if addToEmptyDescriptionFlag {
+        res := GetCurrentTracking()
+        if res != "not running" {
+            var currentTrackBody CurrentTogglTrack
+            json.Unmarshal([]byte(res), &currentTrackBody)
+            if currentTrackBody.Description == "" {
+                av.Var("prompt","false")
+                log.Println("Description is empty, adding issue to currently running entry")
+                av.Arg(AddDescription(overrideIssueKeyFlag, currentTrackBody.ID))
+            } else {
+                av.Var("prompt","true")
+            }
+            if err := av.Send(); err != nil {
+                panic(err)
+            }
+        }
+        return
+    }
+
+    if overrideIssueKeyFlag != "" && !overrideDescriptionFlag {
         StartTracking(overrideIssueKeyFlag)
         return
     }
