@@ -40,6 +40,7 @@ var (
     overrideDescriptionFlag bool
     checkRunningFlag        bool
     overrideIssueKeyFlag    string
+    addToEmptyDescriptionFlag   bool
 )
 
 func init() {
@@ -51,21 +52,7 @@ func init() {
     flag.BoolVar(&overrideDescriptionFlag, "override-description", false, "overrides description in current toggl entry")
     flag.BoolVar(&checkRunningFlag, "check", false, "checks if toggl is currently running")
     flag.StringVar(&overrideIssueKeyFlag, "issue-key", "", "enables the user to pass a issue key to the workflow")
-}
-
-func CheckRunning() string {
-    res := GetCurrentTracking()
-    if res != "not running" {
-        fmt.Printf("Toggl is running")
-        return "running"
-    } else {
-        fmt.Printf("Toggl is not currently running")
-        return "not-running"
-    }
-}
-
-func OverrideIssueKey(issueKey string) {
-    StartTracking(issueKey)
+    flag.BoolVar(&addToEmptyDescriptionFlag, "add-description", false, "Add issue key to empty description")
 }
 
 func GetURL() string {
@@ -127,12 +114,40 @@ func run() {
         log.Fatal(err)
     }
 
+    av := aw.NewArgVars()
     if checkRunningFlag {
-        CheckRunning()
+        res := GetCurrentTracking()
+        if res != "not running" {
+            av.Var("running","true")
+        } else {
+            av.Var("running","false")
+        }
+        if err := av.Send(); err != nil {
+            panic(err)
+        }
         return
     }
 
-    if overrideIssueKeyFlag != "" {
+    if addToEmptyDescriptionFlag {
+        res := GetCurrentTracking()
+        if res != "not running" {
+            var currentTrackBody CurrentTogglTrack
+            json.Unmarshal([]byte(res), &currentTrackBody)
+            if currentTrackBody.Description == "" {
+                av.Var("prompt","false")
+                log.Println("Description is empty, adding issue to currently running entry")
+                av.Arg(AddDescription(overrideIssueKeyFlag, currentTrackBody.ID))
+            } else {
+                av.Var("prompt","true")
+            }
+            if err := av.Send(); err != nil {
+                panic(err)
+            }
+        }
+        return
+    }
+
+    if overrideIssueKeyFlag != "" && !overrideDescriptionFlag {
         StartTracking(overrideIssueKeyFlag)
         return
     }
@@ -173,14 +188,26 @@ func run() {
         return
     }
 
-    av := aw.NewArgVars()
     if overrideDescriptionFlag {
-        res := GetCurrentTracking()
-        var currentTrackBody CurrentTogglTrack
-        json.Unmarshal([]byte(res), &currentTrackBody)
-        if currentTrackBody.Description != "" {
-            log.Println("Overriding description")
-            av.Arg(AddDescription(issue, currentTrackBody.ID))
+        if overrideIssueKeyFlag != ""  {
+            res := GetCurrentTracking()
+            var currentTrackBody CurrentTogglTrack
+            json.Unmarshal([]byte(res), &currentTrackBody)
+            if currentTrackBody.Description != "" {
+                log.Println("Overriding description")
+                av.Arg(AddDescription(overrideIssueKeyFlag, currentTrackBody.ID))
+            }
+        } else {
+            res := GetCurrentTracking()
+            var currentTrackBody CurrentTogglTrack
+            json.Unmarshal([]byte(res), &currentTrackBody)
+            if currentTrackBody.Description != "" {
+                log.Println("Overriding description")
+                av.Arg(AddDescription(issue, currentTrackBody.ID))
+            }
+        }
+        if err := av.Send(); err != nil {
+            panic(err)
         }
         return
     }
