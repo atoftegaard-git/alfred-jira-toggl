@@ -35,7 +35,4 @@ help: ## Display this help screen
 
 package-alfred:
 	@cd ./workflow \
-	&& zip --exclude prefs.plist -r ../$(PROJECT_NAME).alfredworkflow ./* \
-	&& echo -e "Current version:\n$$(rg -e '[1-9]\.[1-9]\.[1-9]' info.plist)\n" | xargs \
-	&& read -p "New version (ex. 1.3.5): " newVersion \
-	&& sed -i -e 's,<string>[1-9]\.[1-9]\.[1-9]</string>,<string>'"$${newVersion}"'</string>,g' $(PLIST)
+	&& zip --exclude prefs.plist -r ../$(PROJECT_NAME).alfredworkflow ./*

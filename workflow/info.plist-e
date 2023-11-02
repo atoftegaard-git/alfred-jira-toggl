@@ -85,6 +85,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>407B77ED-2C4B-4BC7-BE9A-019BDB440ECF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4087FF83-8CB1-4D31-A543-C062BA0E75CE</key>
 		<array>
 			<dict>
@@ -324,7 +337,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</string>
+				<string>407B77ED-2C4B-4BC7-BE9A-019BDB440ECF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -963,7 +976,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl --override-description --issue-key "$issue_key"</string>
+				<string>./alfred-jira-toggl --override-description</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1013,7 +1026,7 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:running}</string>
+						<string>{var:prompt}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -1021,7 +1034,7 @@
 						<key>matchstring</key>
 						<string></string>
 						<key>outputlabel</key>
-						<string>running</string>
+						<string>prompt</string>
 						<key>uid</key>
 						<string>0D9EAD6F-F9E3-434C-8669-111C893F1DD3</string>
 					</dict>
@@ -1035,6 +1048,26 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>action</key>
+					<string>toggl</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>407B77ED-2C4B-4BC7-BE9A-019BDB440ECF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1101,7 +1134,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>1881DBCC-B52A-4800-B66E-DA19A5149645</key>
 		<dict>
 			<key>xpos</key>
-			<real>640</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>615</real>
 		</dict>
@@ -1133,10 +1166,17 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
+		<key>407B77ED-2C4B-4BC7-BE9A-019BDB440ECF</key>
+		<dict>
+			<key>xpos</key>
+			<real>165</real>
+			<key>ypos</key>
+			<real>645</real>
+		</dict>
 		<key>4087FF83-8CB1-4D31-A543-C062BA0E75CE</key>
 		<dict>
 			<key>xpos</key>
-			<real>385</real>
+			<real>355</real>
 			<key>ypos</key>
 			<real>555</real>
 		</dict>
@@ -1171,14 +1211,14 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</key>
 		<dict>
 			<key>xpos</key>
-			<real>170</real>
+			<real>235</real>
 			<key>ypos</key>
 			<real>635</real>
 		</dict>
 		<key>7EE9DB2F-6ABC-4A13-AAC5-78D0A8FFC95E</key>
 		<dict>
 			<key>xpos</key>
-			<real>525</real>
+			<real>495</real>
 			<key>ypos</key>
 			<real>560</real>
 		</dict>
@@ -1206,7 +1246,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>AE27CCFE-6CCB-48C4-BBBA-D902202B79A1</key>
 		<dict>
 			<key>xpos</key>
-			<real>390</real>
+			<real>360</real>
 			<key>ypos</key>
 			<real>670</real>
 		</dict>
@@ -1234,7 +1274,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>CB39D037-7186-4395-B38C-877D03E36098</key>
 		<dict>
 			<key>xpos</key>
-			<real>640</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>505</real>
 		</dict>
@@ -1334,7 +1374,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.1</string>
+	<string>1.7.0</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

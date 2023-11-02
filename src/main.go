@@ -53,21 +53,6 @@ func init() {
     flag.StringVar(&overrideIssueKeyFlag, "issue-key", "", "enables the user to pass a issue key to the workflow")
 }
 
-func CheckRunning() string {
-    res := GetCurrentTracking()
-    if res != "not running" {
-        fmt.Printf("Toggl is running")
-        return "running"
-    } else {
-        fmt.Printf("Toggl is not currently running")
-        return "not-running"
-    }
-}
-
-func OverrideIssueKey(issueKey string) {
-    StartTracking(issueKey)
-}
-
 func GetURL() string {
     script := `
     tell application "Google Chrome"
@@ -127,8 +112,17 @@ func run() {
         log.Fatal(err)
     }
 
+    av := aw.NewArgVars()
     if checkRunningFlag {
-        CheckRunning()
+        res := GetCurrentTracking()
+        if res != "not running" {
+            av.Var("running","true")
+        } else {
+            av.Var("running","false")
+        }
+        if err := av.Send(); err != nil {
+            panic(err)
+        }
         return
     }
 
@@ -173,14 +167,26 @@ func run() {
         return
     }
 
-    av := aw.NewArgVars()
     if overrideDescriptionFlag {
-        res := GetCurrentTracking()
-        var currentTrackBody CurrentTogglTrack
-        json.Unmarshal([]byte(res), &currentTrackBody)
-        if currentTrackBody.Description != "" {
-            log.Println("Overriding description")
-            av.Arg(AddDescription(issue, currentTrackBody.ID))
+        if overrideIssueKeyFlag != ""  {
+            res := GetCurrentTracking()
+            var currentTrackBody CurrentTogglTrack
+            json.Unmarshal([]byte(res), &currentTrackBody)
+            if currentTrackBody.Description != "" {
+                log.Println("Overriding description")
+                av.Arg(AddDescription(overrideIssueKeyFlag, currentTrackBody.ID))
+            }
+        } else {
+            res := GetCurrentTracking()
+            var currentTrackBody CurrentTogglTrack
+            json.Unmarshal([]byte(res), &currentTrackBody)
+            if currentTrackBody.Description != "" {
+                log.Println("Overriding description")
+                av.Arg(AddDescription(issue, currentTrackBody.ID))
+            }
+        }
+        if err := av.Send(); err != nil {
+            panic(err)
         }
         return
     }
