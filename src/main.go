@@ -38,6 +38,8 @@ var (
     stopTogglEntryFlag      bool
     startTogglEntryFlag     bool
     overrideDescriptionFlag bool
+    checkRunningFlag        bool
+    overrideIssueKeyFlag    string
 )
 
 func init() {
@@ -47,6 +49,23 @@ func init() {
     flag.BoolVar(&stopTogglEntryFlag, "stop-entry", false, "stops current toggl entry")
     flag.BoolVar(&startTogglEntryFlag, "start-entry", false, "starts a new empty toggl entry")
     flag.BoolVar(&overrideDescriptionFlag, "override-description", false, "overrides description in current toggl entry")
+    flag.BoolVar(&checkRunningFlag, "check", false, "checks if toggl is currently running")
+    flag.StringVar(&overrideIssueKeyFlag, "issue-key", "", "enables the user to pass a issue key to the workflow")
+}
+
+func CheckRunning() string {
+    res := GetCurrentTracking()
+    if res != "not running" {
+        fmt.Printf("Toggl is running")
+        return "running"
+    } else {
+        fmt.Printf("Toggl is not currently running")
+        return "not-running"
+    }
+}
+
+func OverrideIssueKey(issueKey string) {
+    StartTracking(issueKey)
 }
 
 func GetURL() string {
@@ -106,6 +125,16 @@ func run() {
     err = wf.Config.To(cfg)
     if err != nil {
         log.Fatal(err)
+    }
+
+    if checkRunningFlag {
+        CheckRunning()
+        return
+    }
+
+    if overrideIssueKeyFlag != "" {
+        StartTracking(overrideIssueKeyFlag)
+        return
     }
 
     if startTogglEntryFlag {
