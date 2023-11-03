@@ -119,6 +119,13 @@ func run() {
         res := GetCurrentTracking()
         if res != "not running" {
             av.Var("running","true")
+            var currentTrackBody CurrentTogglTrack
+            json.Unmarshal([]byte(res), &currentTrackBody)
+            if currentTrackBody.Description == "" {
+                av.Var("prompt","false")
+            } else {
+                av.Var("prompt","true")
+            }
         } else {
             av.Var("running","false")
         }
