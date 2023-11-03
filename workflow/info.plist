@@ -1511,7 +1511,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.1</string>
+	<string>1.7.2</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
