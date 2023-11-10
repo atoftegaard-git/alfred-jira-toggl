@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.keido.dk.alfred.alfred-toggl-jira</string>
+	<string>com.keido.dk.alfred.alfred-jira-toggl</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
@@ -164,6 +164,34 @@
 				<false/>
 			</dict>
 		</array>
+		<key>63CC4F94-8CDF-404E-BB4D-D498C0F2A760</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2B5EC8C-17AA-4C37-872F-7515C740618A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F6F844B7-2F2E-4A29-961A-77A76E584E48</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6B826507-9400-427B-B570-20A65B62130B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>63CC4F94-8CDF-404E-BB4D-D498C0F2A760</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</key>
 		<array>
 			<dict>
@@ -216,6 +244,21 @@
 				<false/>
 			</dict>
 		</array>
+		<key>80011131-2E65-4E05-8A0B-4EA735309DE7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>EA5C7206-20C3-464D-81F6-9E726BC3B00A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8B7CCCF3-FD28-42DF-9EC2-966D590E580F</key>
 		<array>
 			<dict>
@@ -254,6 +297,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6B826507-9400-427B-B570-20A65B62130B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>AAF401A3-E6F1-44CB-BE6E-CE053A339561</key>
 		<array>
 			<dict>
@@ -282,6 +338,30 @@
 		</array>
 		<key>B495392B-B974-46C7-8898-479E7B75DA8E</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E3FD874A-55AA-4B2E-ACA0-99A4C2E87847</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>877BCD3A-D19B-4A83-A0A2-37B3B9B3670B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E3FD874A-55AA-4B2E-ACA0-99A4C2E87847</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>B032D388-EC46-4061-BC97-02B74B99F17B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>5C50A1EA-0D9F-40E8-9B1B-5C955B101095</string>
@@ -364,6 +444,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>14C82E42-0ED7-4C27-9976-EBF82C64979F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E3FD874A-55AA-4B2E-ACA0-99A4C2E87847</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>80011131-2E65-4E05-8A0B-4EA735309DE7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -477,6 +570,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./alfred-jira-toggl --prompt-for-updates</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E3FD874A-55AA-4B2E-ACA0-99A4C2E87847</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -511,12 +627,145 @@
 				<key>elselabel</key>
 				<string>else</string>
 				<key>hideelse</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>45A9F949-D0F2-4A74-AFB0-49D7AF1B556A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"title":"Install new version","arg":"install"},{"title":"Cancel"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Update the workflow?</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>6B826507-9400-427B-B570-20A65B62130B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./alfred-jira-toggl --update</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A2B5EC8C-17AA-4C37-872F-7515C740618A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>install</string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>F6F844B7-2F2E-4A29-961A-77A76E584E48</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>63CC4F94-8CDF-404E-BB4D-D498C0F2A760</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>prompt</string>
+						<key>outputlabel</key>
+						<string>prompt</string>
+						<key>uid</key>
+						<string>EA5C7206-20C3-464D-81F6-9E726BC3B00A</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>80011131-2E65-4E05-8A0B-4EA735309DE7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -540,6 +789,29 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>3BB33EEF-8DC3-405A-9295-87A85F6B201A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./alfred-jira-toggl $flag</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8DCF5167-2BD2-4755-8CFA-E1CD942B764A</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -595,29 +867,6 @@
 			<string>AAF401A3-E6F1-44CB-BE6E-CE053A339561</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>./alfred-jira-toggl $flag</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8DCF5167-2BD2-4755-8CFA-E1CD942B764A</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -779,6 +1028,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>511CDDB8-844F-4AD7-A228-732C880DEC5B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -796,25 +1064,6 @@
 			<string>DEAB5EC7-274E-4C6C-8310-9BF46A0FC8F9</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>511CDDB8-844F-4AD7-A228-732C880DEC5B</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -850,25 +1099,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>post-notification</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>5A75BEEF-EA05-4B41-9058-BF531D91A025</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -888,6 +1118,25 @@
 			<string>D466EB30-9160-4F40-898E-87161AA09882</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>post-notification</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>5A75BEEF-EA05-4B41-9058-BF531D91A025</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1011,7 +1260,7 @@
 				<key>elselabel</key>
 				<string>else</string>
 				<key>hideelse</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -1060,29 +1309,6 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl --override-description --issue-key "$issue_key"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1881DBCC-B52A-4800-B66E-DA19A5149645</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
 				<string>./alfred-jira-toggl --check</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
@@ -1100,6 +1326,29 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>EA0841BF-2A81-4734-BB4B-01ECE7AA5DEC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./alfred-jira-toggl --override-description --issue-key "$issue_key"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1881DBCC-B52A-4800-B66E-DA19A5149645</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1225,199 +1474,309 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 	<dict>
 		<key>141A9C53-A96E-4B75-AAA2-6CA71D4652A9</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>45</real>
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
 		<key>14C82E42-0ED7-4C27-9976-EBF82C64979F</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>195</real>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
 		<key>1881DBCC-B52A-4800-B66E-DA19A5149645</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>580</real>
 		</dict>
 		<key>18F76DB7-75CF-4A40-8036-2DEB133D4D2D</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
 		<key>1CB32A87-A671-46AF-AF62-9723E3A80867</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
 		<key>20A98376-0101-4A5A-8F34-BE02B93FFA42</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>635</real>
 		</dict>
 		<key>3BB33EEF-8DC3-405A-9295-87A85F6B201A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
 		<key>4087FF83-8CB1-4D31-A543-C062BA0E75CE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>520</real>
 		</dict>
 		<key>45A9F949-D0F2-4A74-AFB0-49D7AF1B556A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>660</real>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
 		<key>511CDDB8-844F-4AD7-A228-732C880DEC5B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>995</real>
+			<real>1065</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
 		<key>5A75BEEF-EA05-4B41-9058-BF531D91A025</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>380</real>
 		</dict>
 		<key>5C50A1EA-0D9F-40E8-9B1B-5C955B101095</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>1130</real>
+			<real>1200</real>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
+		<key>63CC4F94-8CDF-404E-BB4D-D498C0F2A760</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1490</real>
+			<key>ypos</key>
+			<real>110</real>
+		</dict>
+		<key>6B826507-9400-427B-B570-20A65B62130B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1330</real>
+			<key>ypos</key>
+			<real>80</real>
+		</dict>
 		<key>74D06B5F-5499-41C6-8CCA-F39F9025F65F</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>880</real>
+			<real>895</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>635</real>
 		</dict>
 		<key>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>600</real>
 		</dict>
 		<key>7EE9DB2F-6ABC-4A13-AAC5-78D0A8FFC95E</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>565</real>
+			<real>580</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>525</real>
+		</dict>
+		<key>80011131-2E65-4E05-8A0B-4EA735309DE7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1225</real>
+			<key>ypos</key>
+			<real>110</real>
 		</dict>
 		<key>8B7CCCF3-FD28-42DF-9EC2-966D590E580F</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>465</real>
 			<key>ypos</key>
 			<real>210</real>
 		</dict>
 		<key>8DCF5167-2BD2-4755-8CFA-E1CD942B764A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>255</real>
+			<real>275</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>140</real>
+		</dict>
+		<key>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1275</real>
+			<key>ypos</key>
+			<real>110</real>
+		</dict>
+		<key>A2B5EC8C-17AA-4C37-872F-7515C740618A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1570</real>
+			<key>ypos</key>
+			<real>80</real>
 		</dict>
 		<key>AAF401A3-E6F1-44CB-BE6E-CE053A339561</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>195</real>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
 		<key>AE27CCFE-6CCB-48C4-BBBA-D902202B79A1</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>760</real>
 		</dict>
 		<key>B495392B-B974-46C7-8898-479E7B75DA8E</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>910</real>
+			<real>980</real>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
 		<key>B71EDAC7-845B-48EB-827D-651E838E5F71</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>45</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
 		<key>C688571F-D493-4E9C-82A4-A8C62BA604B0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>520</real>
 			<key>ypos</key>
 			<real>65</real>
 		</dict>
 		<key>CB39D037-7186-4395-B38C-877D03E36098</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>470</real>
 		</dict>
 		<key>D466EB30-9160-4F40-898E-87161AA09882</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>275</real>
+			<real>290</real>
 			<key>ypos</key>
 			<real>380</real>
 		</dict>
 		<key>DEAB5EC7-274E-4C6C-8310-9BF46A0FC8F9</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>1130</real>
+			<real>1200</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
 		<key>E0647A3C-096C-4EF2-8BEB-77539BABFEBE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>45</real>
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
+		<key>E3FD874A-55AA-4B2E-ACA0-99A4C2E87847</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1080</real>
+			<key>ypos</key>
+			<real>65</real>
+		</dict>
 		<key>EA0841BF-2A81-4734-BB4B-01ECE7AA5DEC</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>50</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>580</real>
 		</dict>
 		<key>F44AC37E-5CEA-4AC9-829E-6B391167037D</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>555</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1464,30 +1823,9 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>variable</key>
 			<string>jira_url</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>When using RW jira workflow, this can be used to pass an issuekey and start toggl with this.</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>issue_key</string>
-		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.4</string>
+	<string>1.7.5</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

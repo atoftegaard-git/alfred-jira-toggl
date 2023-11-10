@@ -1,132 +1,133 @@
 package main
 
 import (
-    "bytes"
-    "fmt"
-    "net/http"
-    "log"
-    "io/ioutil"
-    "time"
+	"bytes"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"time"
 )
-func GetCurrentTracking() (msg string) {
-    req, err := http.NewRequest(http.MethodGet, "https://api.track.toggl.com/api/v9/me/time_entries/current", nil)
-    if err != nil {
-        log.Fatal(err)
-        return ""
-    }
-    req.Header.Set("Content-Type", "application/json; charset=utf-8")
-    req.SetBasicAuth(cfg.APIToken, "api_token")
 
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    if err != nil {
-        log.Fatal(err)
-        return ""
-    }
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        log.Fatal(err)
-        return ""
-    }
-    if string(body) == "null" {
-        log.Printf("Time tracking not running")
-        return "not running"
-    } else {
-        log.Printf("Time tracking already running")
-        log.Println("JSON returned from currently runnning tracking:", string(body))
-        return string(body)
-    }
+func GetCurrentTracking() (msg string) {
+	req, err := http.NewRequest(http.MethodGet, "https://api.track.toggl.com/api/v9/me/time_entries/current", nil)
+	if err != nil {
+		log.Fatal(err)
+		return ""
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.SetBasicAuth(cfg.APIToken, "api_token")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+		return ""
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+		return ""
+	}
+	if string(body) == "null" {
+		log.Printf("Time tracking not running")
+		return "not running"
+	} else {
+		log.Printf("Time tracking already running")
+		log.Println("JSON returned from currently runnning tracking:", string(body))
+		return string(body)
+	}
 }
 
 func StartTracking(issue string) {
-    now := time.Now()
-    var unix_start_time = -1 * now.Unix()
-    start_date := now.Format(time.RFC3339)
+	now := time.Now()
+	var unix_start_time = -1 * now.Unix()
+	start_date := now.Format(time.RFC3339)
 
-    create_tracking_jsonbody := fmt.Sprintf(`{"created_with": "alfred", "description": "%s", "duration": %d, "start": "%s", "workspace_id": %d}`, issue, unix_start_time, start_date, cfg.WorkspaceID)
-    log.Println("Payload to start tracking:", create_tracking_jsonbody)
-    bodyBuffered := bytes.NewBuffer([]byte(create_tracking_jsonbody))
-    togglUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries", cfg.WorkspaceID)
+	create_tracking_jsonbody := fmt.Sprintf(`{"created_with": "alfred", "description": "%s", "duration": %d, "start": "%s", "workspace_id": %d}`, issue, unix_start_time, start_date, cfg.WorkspaceID)
+	log.Println("Payload to start tracking:", create_tracking_jsonbody)
+	bodyBuffered := bytes.NewBuffer([]byte(create_tracking_jsonbody))
+	togglUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries", cfg.WorkspaceID)
 
-    req, err := http.NewRequest(http.MethodPost, togglUrl, bodyBuffered)
-    if err != nil {
-        log.Fatal(err)
-    }
-    req.Header.Set("Content-Type", "application/json; charset=utf-8")
-    req.SetBasicAuth(cfg.APIToken, "api_token")
+	req, err := http.NewRequest(http.MethodPost, togglUrl, bodyBuffered)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if issue == "" {
-        fmt.Printf("Tracking started")
-    } else {
-        fmt.Printf("Tracking started for %s", issue)
-    }
-    log.Println("JSON returned from newly started tracking:", string(body))
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if issue == "" {
+		fmt.Printf("Tracking started")
+	} else {
+		fmt.Printf("Tracking started for %s", issue)
+	}
+	log.Println("JSON returned from newly started tracking:", string(body))
 }
 
 func AddDescription(description string, currentTrackID int) (msg string) {
-    currentTogglTrackUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries/%d", cfg.WorkspaceID, currentTrackID)
+	currentTogglTrackUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries/%d", cfg.WorkspaceID, currentTrackID)
 
-    newDescription := fmt.Sprintf(`{"workspace_id":%d,"description":"%s"}`, cfg.WorkspaceID, description)
-    log.Println("Payload to add description:", newDescription)
-    bodyBuffered := bytes.NewBuffer([]byte(newDescription))
+	newDescription := fmt.Sprintf(`{"workspace_id":%d,"description":"%s"}`, cfg.WorkspaceID, description)
+	log.Println("Payload to add description:", newDescription)
+	bodyBuffered := bytes.NewBuffer([]byte(newDescription))
 
-    req, err := http.NewRequest(http.MethodPut, currentTogglTrackUrl, bodyBuffered)
-    if err != nil {
-        log.Fatal(err)
-    }
-    req.Header.Set("Content-Type", "application/json; charset=utf-8")
-    req.SetBasicAuth(cfg.APIToken, "api_token")
+	req, err := http.NewRequest(http.MethodPut, currentTogglTrackUrl, bodyBuffered)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    if err != nil {
-        log.Fatal(err)
-    }
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        log.Fatal(err)
-    }
-    log.Println("JSON returned from editing description", string(body))
-    return fmt.Sprintf("%s added to current toggl entry", description)
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("JSON returned from editing description", string(body))
+	return fmt.Sprintf("%s added to current toggl entry", description)
 }
 
 func StopTogglEntry(currentTrackID int) error {
-    currentTogglTrackUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries/%d/stop", cfg.WorkspaceID, currentTrackID)
-    req, err := http.NewRequest(http.MethodPatch, currentTogglTrackUrl, nil)
-    if err != nil {
-        log.Println(err)
-        return err
-    }
-    req.Header.Set("Content-Type", "application/json; charset=utf-8")
-    req.SetBasicAuth(cfg.APIToken, "api_token")
+	currentTogglTrackUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries/%d/stop", cfg.WorkspaceID, currentTrackID)
+	req, err := http.NewRequest(http.MethodPatch, currentTogglTrackUrl, nil)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    if err != nil {
-        log.Println(err)
-        return err
-    }
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
 
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        log.Println(err)
-        return err
-    }
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
 
-    log.Println("Current Toggl entry stopped:", string(body))
-    return nil
+	log.Println("Current Toggl entry stopped:", string(body))
+	return nil
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -11,8 +10,8 @@ import (
 	"strings"
 
 	aw "github.com/deanishe/awgo"
+	"github.com/deanishe/awgo/update"
 	"github.com/deanishe/awgo/util"
-    "github.com/deanishe/awgo/update"
 	"github.com/ncruces/zenity"
 )
 
@@ -28,38 +27,33 @@ type CurrentTogglTrack struct {
 }
 
 const (
-    repo = "atoftegaard/alfred-toggl-jira"
+	repo            = "atoftegaard-git/alfred-jira-toggl"
 	keychainAccount = "alfred-jira-toggl"
-    updateJobName = "checkForUpdates"
+	updateJobName   = "checkForUpdates"
 )
 
 var (
-	wf                        *aw.Workflow
-	cfg                       *WorkflowConfig
-	clearAuthFlag             bool
-	authFlag                  bool
-	stopTogglEntryFlag        bool
-	startTogglEntryFlag       bool
-	copyIssueKeyFlag          bool
-	overrideDescriptionFlag   bool
-	checkRunningFlag          bool
-	overrideIssueKeyFlag      string
-	addToEmptyDescriptionFlag bool
+	wf                           *aw.Workflow
+	cfg                          *WorkflowConfig
+	clearAuthFlag                bool
+	authFlag                     bool
+	stopTogglEntryFlag           bool
+	startTogglEntryFlag          bool
+	copyIssueKeyFlag             bool
+	overrideDescriptionFlag      bool
+	checkRunningFlag             bool
+	overrideIssueKeyFlag         string
+	addToEmptyDescriptionFlag    bool
+	checkForUpdatesFlag          bool
+	promptForUpdateAvailableFlag bool
+	doUpdateFlag                 bool
 )
 
 func init() {
 	wf = aw.New(
-        update.GitHub(repo),
-    )
-	flag.BoolVar(&clearAuthFlag, "clear-auth", false, "clear toggl api token from keychain")
-	flag.BoolVar(&authFlag, "auth", false, "adds toggl api token to keychain")
-	flag.BoolVar(&stopTogglEntryFlag, "stop-entry", false, "stops current toggl entry")
-	flag.BoolVar(&startTogglEntryFlag, "start-entry", false, "starts a new empty toggl entry")
-	flag.BoolVar(&copyIssueKeyFlag, "copy-issue-key", false, "copies jira key from url")
-	flag.BoolVar(&overrideDescriptionFlag, "override-description", false, "overrides description in current toggl entry")
-	flag.BoolVar(&checkRunningFlag, "check", false, "checks if toggl is currently running")
-	flag.StringVar(&overrideIssueKeyFlag, "issue-key", "", "enables the user to pass a issue key to the workflow")
-	flag.BoolVar(&addToEmptyDescriptionFlag, "add-description", false, "Add issue key to empty description")
+		update.GitHub(repo),
+		aw.MagicPrefix("fuck"),
+	)
 }
 
 func GetURL() string {
@@ -77,34 +71,38 @@ func GetURL() string {
 }
 
 func run() {
-	wf.Args()
-	flag.Parse()
+	if err := cli.Parse(wf.Args()); err != nil {
+		wf.FatalError(err)
+	}
 
-    if opts.Update {
-        wf.Configure(aw.TextErrors(true))
-        log.Println("Checking for updates...")
-        if err := wf.CheckForUpdate(); err != nil {
-            wf.FatalError(err)
-        }
-        return
-    }
+	if checkForUpdatesFlag {
+		wf.Configure(aw.TextErrors(true))
+		log.Println("Checking for updates...")
+		if err := wf.CheckForUpdate(); err != nil {
+			wf.FatalError(err)
+		}
+		return
+	}
 
-    if wf.UpdateCheckDue() && !wf.IsRunning(updateJobName) {
-        log.Println("Running update check in background...")
-        cmd := exec.Command(os.Args[0], "--update")
-        if err := wf.RunInBackground(updateJobName, cmd); err != nil {
-            log.Printf("Error starting update check: %s", err)
-        }
-    }
+	if wf.UpdateCheckDue() && !wf.IsRunning(updateJobName) {
+		log.Println("Running update check in background...")
+		cmd := exec.Command(os.Args[0], "--check-for-updates")
+		if err := wf.RunInBackground(updateJobName, cmd); err != nil {
+			log.Printf("Error starting update check: %s", err)
+		}
+	}
 
-    if wf.UpdateAvailable() {
-        wf.Configure(aw.SuppressUIDs(true))
-        wf.NewItem("Update Available!").
-            Subtitle("Press ⏎ to install").
-            Autocomplete("workflow:update").
-            Valid(false).
-            Icon(aw.IconInfo)
-    }
+	if promptForUpdateAvailableFlag {
+		if wf.UpdateAvailable() {
+			fmt.Printf("prompt")
+			return
+		}
+	}
+
+	if doUpdateFlag {
+		wf.Updater.Install()
+		return
+	}
 
 	if clearAuthFlag {
 		err := wf.Keychain.Delete(keychainAccount)
