@@ -350,7 +350,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>669F83B7-7F8D-472D-9665-F99386549493</string>
+				<string>5A75BEEF-EA05-4B41-9058-BF531D91A025</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -430,7 +430,7 @@
 				<integer>102</integer>
 				<key>script</key>
 				<string>./alfred-jira-toggl --stop-entry &gt; /dev/null
-./alfred-jira-toggl</string>
+./alfred-jira-toggl --start-entry</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -585,6 +585,8 @@
 				<dict>
 					<key>action</key>
 					<string>copy</string>
+					<key>flag</key>
+					<string>--copy-issue-key</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -602,7 +604,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl</string>
+				<string>./alfred-jira-toggl $flag</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -755,25 +757,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string></string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>27F9DC1C-B8BB-443B-BECA-A06CDF0D3059</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -782,6 +765,8 @@
 				<dict>
 					<key>action</key>
 					<string>toggl</string>
+					<key>flag</key>
+					<string>--start-entry</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -865,21 +850,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
+				<key>externaltriggerid</key>
+				<string>post-notification</string>
+				<key>passinputasargument</key>
 				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Jira Toggl Integration</string>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>669F83B7-7F8D-472D-9665-F99386549493</string>
+			<string>5A75BEEF-EA05-4B41-9058-BF531D91A025</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1257,9 +1240,9 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>1881DBCC-B52A-4800-B66E-DA19A5149645</key>
 		<dict>
 			<key>xpos</key>
-			<real>640</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>565</real>
 		</dict>
 		<key>18F76DB7-75CF-4A40-8036-2DEB133D4D2D</key>
 		<dict>
@@ -1278,16 +1261,9 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>20A98376-0101-4A5A-8F34-BE02B93FFA42</key>
 		<dict>
 			<key>xpos</key>
-			<real>390</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>670</real>
-		</dict>
-		<key>27F9DC1C-B8BB-443B-BECA-A06CDF0D3059</key>
-		<dict>
-			<key>xpos</key>
-			<real>780</real>
-			<key>ypos</key>
-			<real>270</real>
+			<real>620</real>
 		</dict>
 		<key>3BB33EEF-8DC3-405A-9295-87A85F6B201A</key>
 		<dict>
@@ -1299,9 +1275,9 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>4087FF83-8CB1-4D31-A543-C062BA0E75CE</key>
 		<dict>
 			<key>xpos</key>
-			<real>385</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>505</real>
 		</dict>
 		<key>45A9F949-D0F2-4A74-AFB0-49D7AF1B556A</key>
 		<dict>
@@ -1317,6 +1293,13 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
+		<key>5A75BEEF-EA05-4B41-9058-BF531D91A025</key>
+		<dict>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>380</real>
+		</dict>
 		<key>5C50A1EA-0D9F-40E8-9B1B-5C955B101095</key>
 		<dict>
 			<key>xpos</key>
@@ -1324,33 +1307,26 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
-		<key>669F83B7-7F8D-472D-9665-F99386549493</key>
-		<dict>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>380</real>
-		</dict>
 		<key>74D06B5F-5499-41C6-8CCA-F39F9025F65F</key>
 		<dict>
 			<key>xpos</key>
-			<real>840</real>
+			<real>880</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>620</real>
 		</dict>
 		<key>762A89C7-0BCF-4AE2-BD90-EC0F6BAB9D8A</key>
 		<dict>
 			<key>xpos</key>
-			<real>170</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>585</real>
 		</dict>
 		<key>7EE9DB2F-6ABC-4A13-AAC5-78D0A8FFC95E</key>
 		<dict>
 			<key>xpos</key>
-			<real>525</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>510</real>
 		</dict>
 		<key>8B7CCCF3-FD28-42DF-9EC2-966D590E580F</key>
 		<dict>
@@ -1376,9 +1352,9 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>AE27CCFE-6CCB-48C4-BBBA-D902202B79A1</key>
 		<dict>
 			<key>xpos</key>
-			<real>390</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>795</real>
+			<real>745</real>
 		</dict>
 		<key>B495392B-B974-46C7-8898-479E7B75DA8E</key>
 		<dict>
@@ -1404,9 +1380,9 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>CB39D037-7186-4395-B38C-877D03E36098</key>
 		<dict>
 			<key>xpos</key>
-			<real>640</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>455</real>
 		</dict>
 		<key>D466EB30-9160-4F40-898E-87161AA09882</key>
 		<dict>
@@ -1432,16 +1408,16 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		<key>EA0841BF-2A81-4734-BB4B-01ECE7AA5DEC</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>565</real>
 		</dict>
 		<key>F44AC37E-5CEA-4AC9-829E-6B391167037D</key>
 		<dict>
 			<key>xpos</key>
-			<real>265</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>540</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1511,7 +1487,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.2</string>
+	<string>1.7.3</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
