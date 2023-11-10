@@ -12,6 +12,7 @@ import (
 
 	aw "github.com/deanishe/awgo"
 	"github.com/deanishe/awgo/util"
+    "github.com/deanishe/awgo/update"
 	"github.com/ncruces/zenity"
 )
 
@@ -27,7 +28,9 @@ type CurrentTogglTrack struct {
 }
 
 const (
+    repo = "atoftegaard/alfred-toggl-jira"
 	keychainAccount = "alfred-jira-toggl"
+    updateJobName = "checkForUpdates"
 )
 
 var (
@@ -45,7 +48,9 @@ var (
 )
 
 func init() {
-	wf = aw.New()
+	wf = aw.New(
+        update.GitHub(repo),
+    )
 	flag.BoolVar(&clearAuthFlag, "clear-auth", false, "clear toggl api token from keychain")
 	flag.BoolVar(&authFlag, "auth", false, "adds toggl api token to keychain")
 	flag.BoolVar(&stopTogglEntryFlag, "stop-entry", false, "stops current toggl entry")
@@ -74,6 +79,32 @@ func GetURL() string {
 func run() {
 	wf.Args()
 	flag.Parse()
+
+    if opts.Update {
+        wf.Configure(aw.TextErrors(true))
+        log.Println("Checking for updates...")
+        if err := wf.CheckForUpdate(); err != nil {
+            wf.FatalError(err)
+        }
+        return
+    }
+
+    if wf.UpdateCheckDue() && !wf.IsRunning(updateJobName) {
+        log.Println("Running update check in background...")
+        cmd := exec.Command(os.Args[0], "--update")
+        if err := wf.RunInBackground(updateJobName, cmd); err != nil {
+            log.Printf("Error starting update check: %s", err)
+        }
+    }
+
+    if wf.UpdateAvailable() {
+        wf.Configure(aw.SuppressUIDs(true))
+        wf.NewItem("Update Available!").
+            Subtitle("Press ⏎ to install").
+            Autocomplete("workflow:update").
+            Valid(false).
+            Icon(aw.IconInfo)
+    }
 
 	if clearAuthFlag {
 		err := wf.Keychain.Delete(keychainAccount)
