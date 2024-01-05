@@ -3,6 +3,12 @@ Copies the url from a focused Chrome window if the URL matches `Jira URL` input 
 
 Afterwards it either copies it into your clipboard or starts tracking with Toggl.
 
+## Installation
+* [Download the latest release](https://github.com/atoftegaard-git/alfred-jira-toggl/releases)
+* Open the downloaded file in Finder.
+* Make sure [Toggl Track](https://toggl.com/track/time-tracking-mac/) is installed
+* If running on macOS Catalina or later, you _**MUST**_ add Alfred to the list of security exceptions for running unsigned software. See [this guide](https://github.com/deanishe/awgo/wiki/Catalina) for instructions on how to do this.
+
 ## Prerequisites
 
 When trying to start a toggl tracking through the workflow for the first time, you'll be asked for a Toggl API token, this can be found [here](https://track.toggl.com/profile).
