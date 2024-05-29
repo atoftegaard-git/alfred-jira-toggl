@@ -1,6 +1,6 @@
 module alfred_copy_jira_key
 
-go 1.20
+go 1.22
 
 require (
 	github.com/deanishe/awgo v0.29.1

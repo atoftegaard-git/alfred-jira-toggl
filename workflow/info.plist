@@ -248,7 +248,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</string>
+				<string>6B826507-9400-427B-B570-20A65B62130B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -289,19 +289,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8B7CCCF3-FD28-42DF-9EC2-966D590E580F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6B826507-9400-427B-B570-20A65B62130B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -723,34 +710,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string></string>
+						<string>{var:prompt}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>5</integer>
 						<key>matchstring</key>
-						<string>prompt</string>
+						<string></string>
 						<key>outputlabel</key>
 						<string>prompt</string>
 						<key>uid</key>
@@ -874,11 +844,11 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string>{var:message}</string>
 				<key>title</key>
 				<string>Jira Toggl Integration</string>
 			</dict>
@@ -1031,7 +1001,7 @@
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
-				<string>{query}</string>
+				<string>{var:message}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
@@ -1050,11 +1020,11 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>Copied {query}</string>
+				<string>Copied {var:message}</string>
 				<key>title</key>
 				<string>Jira Toggl Integration</string>
 			</dict>
@@ -1630,7 +1600,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1225</real>
+			<real>1245</real>
 			<key>ypos</key>
 			<real>110</real>
 		</dict>
@@ -1651,15 +1621,6 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 			<real>275</real>
 			<key>ypos</key>
 			<real>140</real>
-		</dict>
-		<key>8ED77467-0AA2-40F5-9CF8-583EE4F1444D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1275</real>
-			<key>ypos</key>
-			<real>110</real>
 		</dict>
 		<key>A2B5EC8C-17AA-4C37-872F-7515C740618A</key>
 		<dict>
@@ -1825,7 +1786,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.5</string>
+	<string>1.7.6</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

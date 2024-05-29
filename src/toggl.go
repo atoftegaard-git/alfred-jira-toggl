@@ -1,9 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -25,7 +26,7 @@ func GetCurrentTracking() (msg string) {
 		return ""
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 		return ""
@@ -40,7 +41,37 @@ func GetCurrentTracking() (msg string) {
 	}
 }
 
-func StartTracking(issue string) {
+func GetProjectNameFromID(projectID int) (msg string) {
+	togglProjectURL := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/projects/%d", cfg.WorkspaceID, projectID)
+
+    log.Printf("Project ID to look up: %d ", projectID)
+
+	req, err := http.NewRequest(http.MethodGet, togglProjectURL, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.SetBasicAuth(cfg.APIToken, "api_token")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("JSON returned from getting project", string(body))
+
+    var currentProjectBody CurrentTogglProject
+    json.Unmarshal([]byte(body), &currentProjectBody)
+    return currentProjectBody.Name
+}
+
+func StartTracking(issue string) string {
 	now := time.Now()
 	var unix_start_time = -1 * now.Unix()
 	start_date := now.Format(time.RFC3339)
@@ -63,16 +94,18 @@ func StartTracking(issue string) {
 		log.Fatal(err)
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
+    var msg string
 	if issue == "" {
-		fmt.Printf("Tracking started")
+		msg = "Tracking started"
 	} else {
-		fmt.Printf("Tracking started for %s", issue)
+        msg = fmt.Sprintf("Tracking started for %s", issue)
 	}
 	log.Println("JSON returned from newly started tracking:", string(body))
+    return msg
 }
 
 func AddDescription(description string, currentTrackID int) (msg string) {
@@ -96,7 +129,7 @@ func AddDescription(description string, currentTrackID int) (msg string) {
 	}
 
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -122,7 +155,7 @@ func StopTogglEntry(currentTrackID int) error {
 	}
 
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Println(err)
 		return err
