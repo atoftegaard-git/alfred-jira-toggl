@@ -1,8 +1,5 @@
 PROJECT_NAME := "alfred-jira-toggl"
-PKG := "git.netic.dk/users/aht_netic.dk/repos/$(PROJECT_NAME)"
-PLIST := "info.plist"
-SHELL := /bin/bash
-
+PKG := "github.com/rwilgaard/$(PROJECT_NAME)"
 GO111MODULE=on
 
 .EXPORT_ALL_VARIABLES:
@@ -18,6 +15,9 @@ lint: ## Lint Golang files
 
 vet: ## Run go vet
 	@go vet ./src
+
+test: ## Run go test
+	@go test -cover -v ./src/...
 
 build: dep ## Build the binary file
 	@CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o workflow/$(PROJECT_NAME)-amd64 ./src
@@ -35,4 +35,5 @@ help: ## Display this help screen
 
 package-alfred:
 	@cd ./workflow \
-	&& zip --exclude prefs.plist -r ../$(PROJECT_NAME).alfredworkflow ./*
+	&& zip -r ../$(PROJECT_NAME).alfredworkflow ./* \
+	&& cd .. && rm -rf workflow && git checkout workflow
