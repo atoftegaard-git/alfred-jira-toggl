@@ -1438,7 +1438,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 ## Actions
 * ⌘ + .   - Copy the jira issue of the active chrome window to your clipboard
 
-* ⌘ ⇧ + . - Copy the jira issue of the active chrome window and start a toggl entry with it. 
+* ⌘ ⇧ + . - Copy the jira issue of the active chrome window and start a toggl entry with it.
     * If an entry is already running, you will be prompted if you want to start a new one anyway.</string>
 	<key>uidata</key>
 	<dict>
@@ -1786,7 +1786,7 @@ To start tracking with this workflow, you'll need a workspace ID, this can be fo
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.7</string>
+	<string>1.7.8</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
