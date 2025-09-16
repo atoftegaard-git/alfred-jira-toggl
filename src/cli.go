@@ -3,13 +3,8 @@ package main
 import "flag"
 
 var (
-	opts = &options{}
 	cli  = flag.NewFlagSet("alfred-jira-toggl", flag.ContinueOnError)
 )
-
-type options struct {
-	Update bool
-}
 
 func init() {
 	cli.BoolVar(&clearAuthFlag, "clear-auth", false, "clear toggl api token from keychain")

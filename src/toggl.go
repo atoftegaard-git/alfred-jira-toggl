@@ -25,7 +25,12 @@ func GetCurrentTracking() (msg string) {
 		log.Fatal(err)
 		return ""
 	}
-	defer resp.Body.Close()
+	defer func() {
+		err := resp.Body.Close()
+		if err != nil {
+			wf.FatalError(err)
+		}
+	}()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -59,7 +64,12 @@ func GetProjectNameFromID(projectID int) (msg string) {
 		log.Fatal(err)
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+		err := resp.Body.Close()
+		if err != nil {
+			wf.FatalError(err)
+		}
+	}()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -67,7 +77,10 @@ func GetProjectNameFromID(projectID int) (msg string) {
 	log.Println("JSON returned from getting project", string(body))
 
 	var currentProjectBody CurrentTogglProject
-	json.Unmarshal([]byte(body), &currentProjectBody)
+	togglErr := json.Unmarshal([]byte(body), &currentProjectBody)
+	if err != nil {
+		wf.FatalError(togglErr)
+	}
 	return currentProjectBody.Name
 }
 
@@ -94,7 +107,12 @@ func StartTracking(issue string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		err := resp.Body.Close()
+		if err != nil {
+			wf.FatalError(err)
+		}
+	}()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -129,7 +147,12 @@ func AddDescription(description string, currentTrackID int) (msg string) {
 		log.Fatal(err)
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+		err := resp.Body.Close()
+		if err != nil {
+			wf.FatalError(err)
+		}
+	}()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -155,7 +178,12 @@ func StopTogglEntry(currentTrackID int) error {
 		return err
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+		err := resp.Body.Close()
+		if err != nil {
+			wf.FatalError(err)
+		}
+	}()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Println(err)

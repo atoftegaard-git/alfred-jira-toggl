@@ -121,7 +121,10 @@ func run() {
 	}
 
 	if doUpdateFlag {
-		wf.Updater.Install()
+		err := wf.Updater.Install()
+		if err != nil {
+			wf.FatalError(err)
+		}
 		return
 	}
 
@@ -178,7 +181,10 @@ func run() {
 			log.Println(res)
 			av.Var("running", "true")
 			var currentTrackBody *CurrentTogglTrack
-			json.Unmarshal([]byte(res), &currentTrackBody)
+			err := json.Unmarshal([]byte(res), &currentTrackBody)
+			if err != nil {
+				wf.FatalError(err)
+			}
 			av.Var("running", "true")
 			if currentTrackBody.Description == "" {
 				av.Var("prompt", "false")
@@ -201,7 +207,10 @@ func run() {
 		res := GetCurrentTracking()
 		if res != "not running" {
 			var currentTrackBody *CurrentTogglTrack
-			json.Unmarshal([]byte(res), &currentTrackBody)
+			err := json.Unmarshal([]byte(res), &currentTrackBody)
+			if err != nil {
+				wf.FatalError(err)
+			}
 			if currentTrackBody.Description == "" {
 				av.Var("prompt", "false")
 				log.Println("Description is empty, adding issue to currently running entry")
@@ -228,7 +237,11 @@ func run() {
 		res := GetCurrentTracking()
 		if res != "not running" {
 			var currentTrackBody *CurrentTogglTrack
-			json.Unmarshal([]byte(res), &currentTrackBody)
+			togglErr := json.Unmarshal([]byte(res), &currentTrackBody)
+			if err != nil {
+				wf.FatalError(togglErr)
+			}
+
 			err := StopTogglEntry(currentTrackBody.ID)
 			if err != nil {
 				sendMessage(av, "Current toggl could not be stopped")
@@ -244,7 +257,10 @@ func run() {
 		if overrideIssueKeyFlag != "" {
 			res := GetCurrentTracking()
 			var currentTrackBody *CurrentTogglTrack
-			json.Unmarshal([]byte(res), &currentTrackBody)
+			err := json.Unmarshal([]byte(res), &currentTrackBody)
+			if err != nil {
+				wf.FatalError(err)
+			}
 			if currentTrackBody.Description != "" {
 				log.Println("Overriding description")
 				av.Var("message", AddDescription(overrideIssueKeyFlag, currentTrackBody.ID))
@@ -252,7 +268,10 @@ func run() {
 		} else {
 			res := GetCurrentTracking()
 			var currentTrackBody *CurrentTogglTrack
-			json.Unmarshal([]byte(res), &currentTrackBody)
+			err := json.Unmarshal([]byte(res), &currentTrackBody)
+			if err != nil {
+				wf.FatalError(err)
+			}
 			if currentTrackBody.Description != "" {
 				log.Println("Overriding description")
 				av.Var("message", AddDescription(issue, currentTrackBody.ID))
@@ -270,7 +289,10 @@ func run() {
 			sendMessage(av, StartTracking(issue))
 		} else {
 			var currentTrackBody *CurrentTogglTrack
-			json.Unmarshal([]byte(res), &currentTrackBody)
+			err := json.Unmarshal([]byte(res), &currentTrackBody)
+			if err != nil {
+				wf.FatalError(err)
+			}
 			if currentTrackBody.Description == "" {
 				av.Var("prompt", "false")
 				log.Println("Description is empty, adding issue to currently running entry")
