@@ -62,10 +62,10 @@ func init() {
 }
 
 func sendMessage(av *aw.ArgVars, message string) {
-    av.Var("message", message)
-    if err := av.Send(); err != nil {
-        panic(err)
-    }
+	av.Var("message", message)
+	if err := av.Send(); err != nil {
+		panic(err)
+	}
 }
 
 func GetURL() string {
@@ -108,16 +108,16 @@ func run() {
 
 	if promptForUpdateAvailableFlag {
 		if wf.UpdateAvailable() {
-            av.Var("prompt", "true")
-            if err := av.Send(); err != nil {
-                panic(err)
-            }
-            return
+			av.Var("prompt", "true")
+			if err := av.Send(); err != nil {
+				panic(err)
+			}
+			return
 		}
-        av.Var("prompt", "false")
-        if err := av.Send(); err != nil {
-            panic(err)
-        }
+		av.Var("prompt", "false")
+		if err := av.Send(); err != nil {
+			panic(err)
+		}
 	}
 
 	if doUpdateFlag {
@@ -129,10 +129,10 @@ func run() {
 		err := wf.Keychain.Delete(keychainAccount)
 
 		if err != nil {
-            sendMessage(av, "Error deleting toggl api token from keychain")
+			sendMessage(av, "Error deleting toggl api token from keychain")
 			log.Fatal(err)
 		}
-        sendMessage(av, "Toggl api token deleted from keychain")
+		sendMessage(av, "Toggl api token deleted from keychain")
 		return
 	}
 
@@ -157,7 +157,7 @@ func run() {
 		if err != nil {
 			log.Fatal(err)
 		}
-        sendMessage(av, "Toggl api token added to keychain")
+		sendMessage(av, "Toggl api token added to keychain")
 		return
 	}
 	cfg = &WorkflowConfig{APIToken: api_token}
@@ -205,10 +205,10 @@ func run() {
 			if currentTrackBody.Description == "" {
 				av.Var("prompt", "false")
 				log.Println("Description is empty, adding issue to currently running entry")
-                av.Var("message", AddDescription(overrideIssueKeyFlag, currentTrackBody.ID))
+				av.Var("message", AddDescription(overrideIssueKeyFlag, currentTrackBody.ID))
 			} else if currentTrackBody.ProjectID != 0 && GetProjectNameFromID(currentTrackBody.ProjectID) == issue {
 				av.Var("prompt", "false")
-                av.Var("message", fmt.Sprintf("Already tracking %s", issue))
+				av.Var("message", fmt.Sprintf("Already tracking %s", issue))
 			} else {
 				av.Var("prompt", "true")
 			}
@@ -220,7 +220,7 @@ func run() {
 	}
 
 	if overrideIssueKeyFlag != "" && !overrideDescriptionFlag {
-        sendMessage(av, StartTracking(overrideIssueKeyFlag))
+		sendMessage(av, StartTracking(overrideIssueKeyFlag))
 		return
 	}
 
@@ -231,10 +231,10 @@ func run() {
 			json.Unmarshal([]byte(res), &currentTrackBody)
 			err := StopTogglEntry(currentTrackBody.ID)
 			if err != nil {
-                sendMessage(av, "Current toggl could not be stopped")
+				sendMessage(av, "Current toggl could not be stopped")
 				log.Fatal(err)
 			} else {
-                sendMessage(av, "Current toggl entry stopped")
+				sendMessage(av, "Current toggl entry stopped")
 			}
 		}
 		return
@@ -267,17 +267,17 @@ func run() {
 	if startTogglEntryFlag {
 		res := GetCurrentTracking()
 		if res == "not running" {
-			sendMessage(av,StartTracking(issue))
+			sendMessage(av, StartTracking(issue))
 		} else {
 			var currentTrackBody *CurrentTogglTrack
 			json.Unmarshal([]byte(res), &currentTrackBody)
 			if currentTrackBody.Description == "" {
 				av.Var("prompt", "false")
 				log.Println("Description is empty, adding issue to currently running entry")
-                av.Var("message", AddDescription(issue, currentTrackBody.ID))
+				av.Var("message", AddDescription(issue, currentTrackBody.ID))
 			} else if currentTrackBody.ProjectID != 0 && GetProjectNameFromID(currentTrackBody.ProjectID) == issue {
 				av.Var("prompt", "false")
-                av.Var("message", fmt.Sprintf("Already tracking %s", issue))
+				av.Var("message", fmt.Sprintf("Already tracking %s", issue))
 			} else {
 				av.Var("prompt", "true")
 			}
@@ -290,11 +290,10 @@ func run() {
 
 	if copyIssueKeyFlag {
 		if issue != "" {
-            sendMessage(av, issue)
+			sendMessage(av, issue)
 		}
 		return
 	}
-	return
 }
 
 func main() {

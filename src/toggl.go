@@ -1,8 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -44,7 +44,7 @@ func GetCurrentTracking() (msg string) {
 func GetProjectNameFromID(projectID int) (msg string) {
 	togglProjectURL := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/projects/%d", cfg.WorkspaceID, projectID)
 
-    log.Printf("Project ID to look up: %d ", projectID)
+	log.Printf("Project ID to look up: %d ", projectID)
 
 	req, err := http.NewRequest(http.MethodGet, togglProjectURL, nil)
 	if err != nil {
@@ -66,9 +66,9 @@ func GetProjectNameFromID(projectID int) (msg string) {
 	}
 	log.Println("JSON returned from getting project", string(body))
 
-    var currentProjectBody CurrentTogglProject
-    json.Unmarshal([]byte(body), &currentProjectBody)
-    return currentProjectBody.Name
+	var currentProjectBody CurrentTogglProject
+	json.Unmarshal([]byte(body), &currentProjectBody)
+	return currentProjectBody.Name
 }
 
 func StartTracking(issue string) string {
@@ -78,6 +78,7 @@ func StartTracking(issue string) string {
 
 	create_tracking_jsonbody := fmt.Sprintf(`{"created_with": "alfred", "description": "%s", "duration": %d, "start": "%s", "workspace_id": %d}`, issue, unix_start_time, start_date, cfg.WorkspaceID)
 	log.Println("Payload to start tracking:", create_tracking_jsonbody)
+	log.Println("Wworkspace id:", cfg.WorkspaceID)
 	bodyBuffered := bytes.NewBuffer([]byte(create_tracking_jsonbody))
 	togglUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries", cfg.WorkspaceID)
 
@@ -98,14 +99,14 @@ func StartTracking(issue string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-    var msg string
+	var msg string
 	if issue == "" {
 		msg = "Tracking started"
 	} else {
-        msg = fmt.Sprintf("Tracking started for %s", issue)
+		msg = fmt.Sprintf("Tracking started for %s", issue)
 	}
 	log.Println("JSON returned from newly started tracking:", string(body))
-    return msg
+	return msg
 }
 
 func AddDescription(description string, currentTrackID int) (msg string) {
