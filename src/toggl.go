@@ -10,17 +10,41 @@ import (
 	"time"
 )
 
+var (
+	httpClient = &http.Client{}
+	togglBaseURL = "https://api.track.toggl.com/api/v9"
+)
+
+func executeRequest(req *http.Request) (*http.Response, error) {
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.SetBasicAuth(cfg.APIToken, "api_token")
+
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode == 402 {
+		resetsIn := resp.Header.Get("X-Toggl-Quota-Resets-In")
+		msg := "Toggl API quota reached."
+		if resetsIn != "" {
+			msg = fmt.Sprintf("%s Please wait %s seconds before trying again.", msg, resetsIn)
+		}
+		wf.FatalError(fmt.Errorf("%s", msg))
+	}
+
+	return resp, nil
+}
+
 func GetCurrentTracking() (msg string) {
-	req, err := http.NewRequest(http.MethodGet, "https://api.track.toggl.com/api/v9/me/time_entries/current", nil)
+	url := fmt.Sprintf("%s/me/time_entries/current", togglBaseURL)
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		log.Fatal(err)
 		return ""
 	}
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := executeRequest(req)
 	if err != nil {
 		log.Fatal(err)
 		return ""
@@ -47,7 +71,7 @@ func GetCurrentTracking() (msg string) {
 }
 
 func GetProjectNameFromID(projectID int) (msg string) {
-	togglProjectURL := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/projects/%d", cfg.WorkspaceID, projectID)
+	togglProjectURL := fmt.Sprintf("%s/workspaces/%d/projects/%d", togglBaseURL, cfg.WorkspaceID, projectID)
 
 	log.Printf("Project ID to look up: %d ", projectID)
 
@@ -55,11 +79,8 @@ func GetProjectNameFromID(projectID int) (msg string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := executeRequest(req)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -93,17 +114,14 @@ func StartTracking(issue string) string {
 	log.Println("Payload to start tracking:", create_tracking_jsonbody)
 	log.Println("Wworkspace id:", cfg.WorkspaceID)
 	bodyBuffered := bytes.NewBuffer([]byte(create_tracking_jsonbody))
-	togglUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries", cfg.WorkspaceID)
+	togglUrl := fmt.Sprintf("%s/workspaces/%d/time_entries", togglBaseURL, cfg.WorkspaceID)
 
 	req, err := http.NewRequest(http.MethodPost, togglUrl, bodyBuffered)
 	if err != nil {
 		log.Fatal(err)
 	}
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := executeRequest(req)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -128,7 +146,7 @@ func StartTracking(issue string) string {
 }
 
 func AddDescription(description string, currentTrackID int) (msg string) {
-	currentTogglTrackUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries/%d", cfg.WorkspaceID, currentTrackID)
+	currentTogglTrackUrl := fmt.Sprintf("%s/workspaces/%d/time_entries/%d", togglBaseURL, cfg.WorkspaceID, currentTrackID)
 
 	newDescription := fmt.Sprintf(`{"workspace_id":%d,"description":"%s"}`, cfg.WorkspaceID, description)
 	log.Println("Payload to add description:", newDescription)
@@ -138,11 +156,8 @@ func AddDescription(description string, currentTrackID int) (msg string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := executeRequest(req)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -162,17 +177,14 @@ func AddDescription(description string, currentTrackID int) (msg string) {
 }
 
 func StopTogglEntry(currentTrackID int) error {
-	currentTogglTrackUrl := fmt.Sprintf("https://api.track.toggl.com/api/v9/workspaces/%d/time_entries/%d/stop", cfg.WorkspaceID, currentTrackID)
+	currentTogglTrackUrl := fmt.Sprintf("%s/workspaces/%d/time_entries/%d/stop", togglBaseURL, cfg.WorkspaceID, currentTrackID)
 	req, err := http.NewRequest(http.MethodPatch, currentTogglTrackUrl, nil)
 	if err != nil {
 		log.Println(err)
 		return err
 	}
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	req.SetBasicAuth(cfg.APIToken, "api_token")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := executeRequest(req)
 	if err != nil {
 		log.Println(err)
 		return err

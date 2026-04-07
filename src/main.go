@@ -56,9 +56,14 @@ var (
 )
 
 func init() {
-	wf = aw.New(
-		update.GitHub(repo),
-	)
+}
+
+func setupWorkflow() {
+	if wf == nil {
+		wf = aw.New(
+			update.GitHub(repo),
+		)
+	}
 }
 
 func sendMessage(av *aw.ArgVars, message string) {
@@ -80,6 +85,13 @@ func GetURL() string {
 	}
 	log.Println("Issue:", output)
 	return output
+}
+
+func ExtractIssueFromURL(url string, jiraURL string) string {
+	if jiraURL != "" && strings.HasPrefix(url, jiraURL+"/browse") {
+		return regexp.MustCompile("[a-zA-Z]+-[0-9]+").FindString(url)
+	}
+	return ""
 }
 
 func run() {
@@ -169,11 +181,8 @@ func run() {
 		log.Fatal(err)
 	}
 
-	var issue string
 	url := GetURL()
-	if strings.HasPrefix(url, cfg.JiraURL+"/browse") {
-		issue = regexp.MustCompile("[a-zA-Z]+-[0-9]+").FindString(url)
-	}
+	issue := ExtractIssueFromURL(url, cfg.JiraURL)
 
 	if checkRunningFlag {
 		res := GetCurrentTracking()
@@ -319,5 +328,6 @@ func run() {
 }
 
 func main() {
+	setupWorkflow()
 	wf.Run(run)
 }
