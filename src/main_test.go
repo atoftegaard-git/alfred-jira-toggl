@@ -6,11 +6,11 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	os.Setenv("alfred_workflow_bundleid", "test-bundle")
-	os.Setenv("alfred_workflow_cache", "/tmp/alfred-cache")
-	os.Setenv("alfred_workflow_data", "/tmp/alfred-data")
-	os.Setenv("alfred_workflow_version", "1.0.0")
-	os.Setenv("alfred_debug", "1")
+	_ = os.Setenv("alfred_workflow_bundleid", "test-bundle")
+	_ = os.Setenv("alfred_workflow_cache", "/tmp/alfred-cache")
+	_ = os.Setenv("alfred_workflow_data", "/tmp/alfred-data")
+	_ = os.Setenv("alfred_workflow_version", "1.0.0")
+	_ = os.Setenv("alfred_debug", "1")
 
 	os.Exit(m.Run())
 }

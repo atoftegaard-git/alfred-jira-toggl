@@ -43,7 +43,7 @@ func TestGetCurrentTracking(t *testing.T) {
 					t.Errorf("Expected to request '/me/time_entries/current', got: %s", r.URL.Path)
 				}
 				w.Header().Set("Content-Type", "application/json")
-				fmt.Fprint(w, tt.serverResponse)
+				_, _ = fmt.Fprint(w, tt.serverResponse)
 			}))
 			defer server.Close()
 
@@ -77,13 +77,13 @@ func TestStartTracking(t *testing.T) {
 		}
 
 		var body map[string]interface{}
-		json.NewDecoder(r.Body).Decode(&body)
+		_ = json.NewDecoder(r.Body).Decode(&body)
 		if body["description"] != "PROJ-123" {
 			t.Errorf("Expected description 'PROJ-123', got: %v", body["description"])
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprint(w, `{"id": 1, "description": "PROJ-123"}`)
+		_, _ = fmt.Fprint(w, `{"id": 1, "description": "PROJ-123"}`)
 	}))
 	defer server.Close()
 
@@ -115,13 +115,13 @@ func TestAddDescription(t *testing.T) {
 		}
 
 		var body map[string]interface{}
-		json.NewDecoder(r.Body).Decode(&body)
+		_ = json.NewDecoder(r.Body).Decode(&body)
 		if body["description"] != "New Description" {
 			t.Errorf("Expected description 'New Description', got: %v", body["description"])
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprint(w, `{"id": 999, "description": "New Description"}`)
+		_, _ = fmt.Fprint(w, `{"id": 999, "description": "New Description"}`)
 	}))
 	defer server.Close()
 
@@ -153,7 +153,7 @@ func TestStopTogglEntry(t *testing.T) {
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprint(w, `{"id": 888, "stop": "2026-04-07T09:00:00Z"}`)
+		_, _ = fmt.Fprint(w, `{"id": 888, "stop": "2026-04-07T09:00:00Z"}`)
 	}))
 	defer server.Close()
 
