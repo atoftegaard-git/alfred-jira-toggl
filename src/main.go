@@ -89,7 +89,7 @@ func GetURL() string {
 
 func ExtractIssueFromURL(url string, jiraURL string) string {
 	if jiraURL != "" && strings.HasPrefix(url, jiraURL+"/browse") {
-		return regexp.MustCompile("[a-zA-Z]+-[0-9]+").FindString(url)
+		return regexp.MustCompile("[a-zA-Z0-9]+-[0-9]+").FindString(url)
 	}
 	return ""
 }
