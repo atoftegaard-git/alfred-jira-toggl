@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"time"
+
+	aw "github.com/deanishe/awgo"
 )
 
 var (
@@ -30,7 +32,10 @@ func executeRequest(req *http.Request) (*http.Response, error) {
 		if resetsIn != "" {
 			msg = fmt.Sprintf("%s Please wait %s seconds before trying again.", msg, resetsIn)
 		}
-		wf.FatalError(fmt.Errorf("%s", msg))
+		av := aw.NewArgVars()
+
+		sendMessage(av, msg)
+		log.Fatal(fmt.Errorf("%s", msg))
 	}
 
 	return resp, nil

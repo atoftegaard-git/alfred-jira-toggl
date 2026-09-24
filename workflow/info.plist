@@ -852,11 +852,6 @@
 				<key>title</key>
 				<string>Jira Toggl Integration</string>
 			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>post-notification</string>
-			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
