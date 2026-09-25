@@ -509,8 +509,8 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl --stop-entry &gt; /dev/null
-./alfred-jira-toggl --start-entry</string>
+				<string>./alfred-jira-toggl --stop-entry --track-id "$track_id" &gt; /dev/null
+./alfred-jira-toggl --issue-key "$issue_key"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -747,7 +747,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl --override-description</string>
+				<string>./alfred-jira-toggl --override-description --track-id "$track_id"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1143,7 +1143,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl --stop-entry &gt; /dev/null
+				<string>./alfred-jira-toggl --stop-entry --track-id "$track_id" &gt; /dev/null
 ./alfred-jira-toggl --issue-key "$issue_key"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -1302,7 +1302,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl --override-description --issue-key "$issue_key"</string>
+				<string>./alfred-jira-toggl --override-description --issue-key "$issue_key" --track-id "$track_id"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1376,7 +1376,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-jira-toggl --add-description --issue-key "$issue_key"</string>
+				<string>./alfred-jira-toggl --add-description --issue-key "$issue_key" --track-id "$track_id"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

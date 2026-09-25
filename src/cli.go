@@ -3,8 +3,20 @@ package main
 import "flag"
 
 var (
-	cli  = flag.NewFlagSet("alfred-jira-toggl", flag.ContinueOnError)
+	cli = flag.NewFlagSet("alfred-jira-toggl", flag.ContinueOnError)
 )
+
+// issueKeyProvided reports whether -issue-key was passed at all, so that an
+// explicitly empty key still starts an entry the way an absent one does not.
+func issueKeyProvided() bool {
+	var provided bool
+	cli.Visit(func(f *flag.Flag) {
+		if f.Name == "issue-key" {
+			provided = true
+		}
+	})
+	return provided
+}
 
 func init() {
 	cli.BoolVar(&clearAuthFlag, "clear-auth", false, "clear toggl api token from keychain")
@@ -19,4 +31,5 @@ func init() {
 	cli.BoolVar(&checkForUpdatesFlag, "check-for-updates", false, "check for updates")
 	cli.BoolVar(&promptForUpdateAvailableFlag, "prompt-for-updates", false, "prompt for updates")
 	cli.BoolVar(&doUpdateFlag, "update", false, "Update")
+	cli.StringVar(&trackIDFlag, "track-id", "", "id of the running toggl entry, passed down from a previous step")
 }
